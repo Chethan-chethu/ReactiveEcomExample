@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: ReactiveEcomExample
+
+server:
+  port: 7001
