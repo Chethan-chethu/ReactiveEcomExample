@@ -1,0 +1,21 @@
+1) difference b/w Mono<ResponseEntity<T> v/s ResponseEntity<Mono<T>> :
+sol :
+
+-> preferred pattern for "I will asynchronously produce the entire ResponseEntity"
+		database call
+		     ↓
+		Mono<User>
+		     ↓
+		decide: 200 or 404
+		     ↓
+		ResponseEntity<User>
+		     ↓
+		Mono<ResponseEntity<User>> 
+		
+-> prefferred pattern for "The HTTP response/status/headers are available immediately, but the body will be produced asynchronously"
+		ResponseEntity
+		 ├── status: 200
+		 ├── headers: ...
+		 └── body: Mono<User>
+		              ↓
+		          async result		
