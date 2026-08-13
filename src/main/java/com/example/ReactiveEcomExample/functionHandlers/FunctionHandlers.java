@@ -7,6 +7,8 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import reactor.core.publisher.Mono;
+
 @Configuration
 public class FunctionHandlers {
 
@@ -21,5 +23,31 @@ public class FunctionHandlers {
 		return RouterFunctions.route().
 				GET("/routeHandlers/getStringNames",fluxStringHandler::getNames).build();
 	}
+	
+	@Bean
+	public RouterFunction<ServerResponse> handleDoubleRoute(DoubleHandler doubleHandler){
+		return RouterFunctions.route()
+				.GET("/routeHandlers/getDoubleValues",doubleHandler::getDoubleValues).build();
+	}
+	
+	@Bean 
+	public RouterFunction<ServerResponse> handleFluxUsers(UsersHandler usersHandler){
+		return RouterFunctions.route().
+		GET("/routeHandlers/handleFluxUsers",usersHandler::getUsers).
+		GET("/routeHandlers/handleFluxUsersById/{id}",usersHandler::getUserById)
+		.build();
+	}
+	
+	@Bean
+	public RouterFunction<ServerResponse> getNestedUserRoute(UsersHandler usersHandler){
+		return RouterFunctions.nest(
+				RequestPredicates.path("/nest/user"),
+				RouterFunctions.route()
+				.GET("",usersHandler::getString)
+				.GET("getName",usersHandler::getName)
+				.build()
+				);
+	}
+	
 	
 }
