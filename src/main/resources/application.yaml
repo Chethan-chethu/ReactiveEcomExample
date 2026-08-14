@@ -1,6 +1,11 @@
 spring:
   application:
     name: ReactiveEcomExample
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/springReactiveDbDemo
+    username: ims
+    password: ims123
 
 server:
   port: 7001
+

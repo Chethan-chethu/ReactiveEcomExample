@@ -7,6 +7,8 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import com.example.ReactiveEcomExample.functionalEndpoints.service.WorkerService;
+
 import reactor.core.publisher.Mono;
 
 @Configuration
@@ -47,6 +49,16 @@ public class FunctionHandlers {
 				.GET("getName",usersHandler::getName)
 				.build()
 				);
+	}
+	
+	@Bean
+	public RouterFunction<ServerResponse> getR2dbcRouter(WorkerHandler workerHandler){
+		return RouterFunctions.nest(
+				RequestPredicates.path("/r2dbc/worker"),
+				RouterFunctions.route()
+				.GET("/getWorkerById/{id}",workerHandler::getWorkerById).build()
+				);
+		
 	}
 	
 	
