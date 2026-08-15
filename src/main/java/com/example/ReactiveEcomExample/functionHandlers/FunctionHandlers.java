@@ -56,7 +56,8 @@ public class FunctionHandlers {
 		return RouterFunctions.nest(
 				RequestPredicates.path("/r2dbc/worker"),
 				RouterFunctions.route()
-				.GET("/getWorkerById/{id}",workerHandler::getWorkerById).build()
+				.GET("/getWorkerById/{id}",workerHandler::getWorkerById)
+				.GET("/getWorkersList",workerHandler::getWorkersList).build()
 				);
 		
 	}

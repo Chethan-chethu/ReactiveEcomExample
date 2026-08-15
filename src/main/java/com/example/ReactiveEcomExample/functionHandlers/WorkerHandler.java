@@ -23,4 +23,8 @@ public class WorkerHandler {
 		return ServerResponse.ok().body(workerService.getUserById(id),Worker.class);
 	}
 	
+	public Mono<ServerResponse> getWorkersList(ServerRequest request){
+		return ServerResponse.ok().body(workerService.getWorkers(),Worker.class);
+	}
+	
 }
