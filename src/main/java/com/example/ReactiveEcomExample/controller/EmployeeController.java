@@ -17,11 +17,16 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/public")
 @RequiredArgsConstructor
 public class EmployeeController {
 
 	private final EmployeeService employeeService;
+	
+	@GetMapping("/hello")
+	public Mono<String> GetHelloPublicMessage(){
+		return Mono.just("publicHello");
+	}
 	
 	@GetMapping("/map")
 	public Flux<Employee> map(){

@@ -6,6 +6,12 @@ spring:
     username: ims
     password: ims123
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/myRealm
+
 server:
   port: 7001
 
